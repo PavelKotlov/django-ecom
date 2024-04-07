@@ -30,6 +30,11 @@ class Product(models.Model):
   description = models.CharField(max_length=250, default='', blank=True, null=True)
   image = models.ImageField(upload_to='uploads/products/')
 
+  # Check if product on sale
+  is_sale = models.BooleanField(default=False)
+  sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
+
+
   def __Str__(self):
     return f'{self.first_name} {self.last_name}'
 
