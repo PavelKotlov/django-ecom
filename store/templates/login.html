@@ -7,7 +7,8 @@
       <h1 class="display-4 fw-bolder">Login</h1>
       <p class="lead fw-normal text-white-50 mb-0">Login to your account</p>
     </div>
-    <form>
+    <form method="post" action="{% url 'login'%}">
+      {% csrf_token %}
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input
