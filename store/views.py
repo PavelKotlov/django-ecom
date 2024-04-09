@@ -10,7 +10,7 @@ from .forms import SignUpForm
 
 def product(request, pk):
   product = Product.objects.get(id=pk)
-  return render(request, 'home.html', {'product': product})
+  return render(request, 'product.html', {'product': product})
 
 def home(request):
   products = Product.objects.all()
