@@ -7,6 +7,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .forms import SignUpForm
 
+
+def product(request, pk):
+  product = Product.objects.get(id=pk)
+  return render(request, 'home.html', {'product': product})
+
 def home(request):
   products = Product.objects.all()
 
@@ -57,3 +62,4 @@ def register_user(request):
 
   else:
     return render(request, 'register.html', {'form': form})
+  
