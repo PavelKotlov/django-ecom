@@ -2,41 +2,36 @@
 
 <div class="container">
   <div class="row m-5">
-    <center>
-      <div class="col-8">
-        <p align="justify" class="lead fw-normal text-black-50 mb-0">
-          Step into a realm where time transcends its conventional boundaries
-          and embraces the boundless possibilities of the future at DJ's
-          Futuristic Watches. Nestled in the heart of innovation, our store
-          stands as a beacon of horological marvels, offering a curated
-          collection that epitomizes the convergence of technology and style.
-          From sleek, minimalist designs to intricately crafted timepieces that
-          defy the norms of traditional watchmaking, each creation in our
-          selection is a testament to the relentless pursuit of excellence and
-          innovation.
-          <br />
-          <br />
-          At DJ's Futuristic Watches, we believe that time is more than mere
-          minutes and seconds—it's a canvas upon which dreams are woven and
-          destinies are shaped. Our expertly curated collection showcases the
-          latest advancements in timekeeping technology, seamlessly integrated
-          with avant-garde designs that push the boundaries of imagination.
-          Whether you're seeking a statement piece that commands attention or a
-          companion for your adventures in the digital age, our diverse range of
-          watches caters to every style and aspiration.
-          <br />
-          <br />
-          More than just a store, DJ's Futuristic Watches is a gateway to a
-          world where innovation knows no bounds. Our knowledgeable staff is
-          dedicated to providing personalized assistance, guiding you through
-          our exclusive selection to find the perfect timepiece that resonates
-          with your unique vision of the future. Step into our showroom and
-          embark on a journey through time—an experience that transcends the
-          ordinary and embraces the extraordinary. Welcome to DJ's Futuristic
-          Watches, where time meets innovation, and the future awaits.
-        </p>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img
+            src="{{product.image.url}}"
+            class="img-fluid rounded-start"
+            alt="..."
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            {% if product.is_sale %}
+            <p class="card-text">
+              <s>${{product.price}}</s> ${{product.sale_price}}
+            </p>
+            {% else %}
+            <p class="card-text">${{product.price}}</p>
+            {% endif %}
+            <br />
+            <br />
+            <br />
+            <p class="card-text">
+              <small class="text-body-secondary">Last updated 3 mins ago</small>
+            </p>
+          </div>
+        </div>
       </div>
-    </center>
+    </div>
   </div>
 </div>
 {% endblock %}
