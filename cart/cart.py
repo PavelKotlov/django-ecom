@@ -11,3 +11,11 @@ class Cart():
     
     # Make cart avaialble on all pages
     self.cart = cart
+
+  def add(self, product):
+    product_id = str(product_id)
+
+    if product_id not in self.cart:
+      self.cart[product_id] = {'price':str(product.price)}
+
+    self.session.modified = True
