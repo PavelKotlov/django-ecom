@@ -8,5 +8,42 @@
     </div>
   </div>
 </header>
+<div class="container">
+  {% if cart_products %} {% for product in cart_products %}
+  <div class="row m-5">
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img
+            src="{{product.image.url}}"
+            class="img-fluid rounded-start"
+            alt="..."
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            {% if product.is_sale %}
+            <p class="card-text">
+              <s>${{product.price}}</s> ${{product.sale_price}}
+            </p>
+            {% else %}
+            <p class="card-text">${{product.price}}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <center>
+    <div class="m-5 p-5">
+      Your cart is empty. Checkout our products
+      <a href="{% url 'home' %}">here</a>
+    </div>
+  </center>
+  {% endif %}
+</div>
 
 {% endblock %}
