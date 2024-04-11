@@ -13,8 +13,11 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
+            <!-- Product Title -->
             <h5 class="card-title">{{product.name}}</h5>
+            <!-- Product Desciption -->
             <p class="card-text">{{product.description}}</p>
+            <!-- Product Price - Check if on sale -->
             {% if product.is_sale %}
             <p class="card-text">
               <s>${{product.price}}</s> ${{product.sale_price}}
@@ -22,9 +25,26 @@
             {% else %}
             <p class="card-text">${{product.price}}</p>
             {% endif %}
-            <br />
-            <br />
-            <br />
+
+            <!-- Product Quantity Selector -->
+            <div class="row justify-content-left mb-5">
+              <div class="col-md-2 align-content-center">Quantity:</div>
+              <div class="col-md-4">
+                <select class="form-select" id="product-qty-selector">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+            </div>
+            <!-- Product Add to Cart button -->
             <button
               type="button"
               value="{{product.id}}"
@@ -41,6 +61,7 @@
 </div>
 
 <script>
+  // Add product to cart
   $(document).on("click", "#add-cart", function (e) {
     e.preventDefault();
     $.ajax({
@@ -48,6 +69,7 @@
       url: "{% url 'cart_add' %}",
       data: {
         product_id: $("#add-cart").val(),
+        product_qty: $("#product-qty-selector option:selected").text(),
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
       },
