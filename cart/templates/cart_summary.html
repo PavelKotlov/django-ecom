@@ -22,15 +22,41 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
+            <!-- Product Title -->
             <h5 class="card-title">{{product.name}}</h5>
+            <!-- Product Desciption -->
             <p class="card-text">{{product.description}}</p>
+            <!-- Product Price - Check if on sale -->
+            <p class="card-text"></p>
             {% if product.is_sale %}
-            <p class="card-text">
               <s>${{product.price}}</s> ${{product.sale_price}}
-            </p>
             {% else %}
-            <p class="card-text">${{product.price}}</p>
+              ${{product.price}}
             {% endif %}
+            </p>
+            <!-- Product Quantity Selector -->
+            <div class="row justify-content-left mb-5">
+              <div class="col-md-2 align-content-center">Quantity:</div>
+              <div class="col-md-4">
+                <select class="form-select" id="product-qty-selector">
+                  {% for key, value in product_quantities.items %} 
+                      {% if key == product.id|slugify %}
+                        <option selected>{{value}}</option>
+                      {% endif %}
+                  {% endfor %}
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       </div>
