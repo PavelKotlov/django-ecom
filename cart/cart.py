@@ -14,9 +14,9 @@ class Cart():
     # Make cart avaialble on all pages
     self.cart = cart
 
-  def add(self, product, quantity):
+  def add(self, product, cart_quantity):
     product_id = str(product.id)
-    product_qty = str(quantity)
+    product_qty = str(cart_quantity)
 
     if product_id not in self.cart:
       self.cart[product_id] = int(product_qty)
@@ -32,3 +32,7 @@ class Cart():
     products = Product.objects.filter(id__in=product_ids)
 
     return products
+  
+  def get_quantities(self):
+    quantities = self.cart
+    return quantities
