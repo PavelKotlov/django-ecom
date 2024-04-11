@@ -58,7 +58,10 @@
               </div>
             </div>
             <!-- Update Cart Button -->
-            <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-card">Update</button>
+            <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart">Update</button>
+             <!-- Delete Cart Button -->
+             <button type="button" data-index="{{product.id}}" class="btn btn-danger delete-product" style="
+             margin-left: 10px; ">Delete</button>
           </div>
         </div>
       </div>
@@ -75,7 +78,8 @@
 </div>
 
 <script>
-  $(document).on("click", ".update-card", function (e) {
+  // update cart
+  $(document).on("click", ".update-cart", function (e) {
     e.preventDefault();
     const productid = $(this).data('index');
     
@@ -85,6 +89,27 @@
       data: {
         product_id: $(this).data('index'),
         product_qty: $("#select" + productid + ' option:selected').text(),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: "post",
+      },
+      success: function (json) {
+        location.reload();
+      },
+
+      error: function (xhr, errmsg, err) {},
+    });
+  });
+
+  // delete product from cart
+  $(document).on("click", ".delete-product", function (e) {
+    e.preventDefault();
+    const productid = $(this).data('index');
+    
+    $.ajax({
+      type: "POST",
+      url: "{% url 'cart_delete' %}",
+      data: {
+        product_id: $(this).data('index'),
         csrfmiddlewaretoken: "{{csrf_token}}",
         action: "post",
       },
