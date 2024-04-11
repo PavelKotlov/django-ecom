@@ -14,10 +14,11 @@ def cart_add(request):
 
   if request.POST.get('action') == 'post':
     product_id = int(request.POST.get('product_id'))
+    product_qty = int(request.POST.get('product_qty'))
     
     product = get_object_or_404(Product, id=product_id)
 
-    cart.add(product=product)
+    cart.add(product=product, cart_quantity=product_qty)
 
     cart_quantity = cart.__len__()
     response = JsonResponse({'qty': cart_quantity})
