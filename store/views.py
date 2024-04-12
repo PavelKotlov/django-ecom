@@ -5,8 +5,24 @@ from .models import Product, Category
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateUserForm
 
+def update_user(request):
+  if request.user.is_authenticated:
+    current_user = User.objects.get(id=request.user.id)
+    user_form = UpdateUserForm(request.POST or None, instance=current_user)
+
+    if user_form.is_valid():
+      user_form.save()
+      login(request, current_user)
+      messages.success(request, ('Profile details saved successfully'))
+      return redirect('home')
+    
+    return render(request, 'update_user.html', {'user_form':user_form})
+  else:
+    messages.success(request, ('Access denied, please login first'))
+    return redirect('home')
+  
 def category_summary(request):
   categories = Category.objects.all()
 
@@ -37,6 +53,9 @@ def about(request):
   return render(request, 'about.html', {})
 
 def login_user(request):
+  if request.user.is_authenticated:
+    return redirect('home')
+  
   # If login form was submitted process login request, else render login.html template.
   if request.method == 'POST':
     username = request.POST['username']
