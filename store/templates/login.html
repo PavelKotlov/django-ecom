@@ -7,29 +7,33 @@
       <h1 class="display-4 fw-bolder">Login</h1>
       <p class="lead fw-normal text-white-50 mb-0">Login to your account</p>
     </div>
-    <form method="POST" action="{% url 'login'%}">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          placeholder="djwatches"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          placeholder="Enter password"
-        />
-      </div>
-      <button type="submit" class="btn btn-primary mt-5">Login</button>
-    </form>
+    <center>
+      <form class="mt-5 col-md-4" method="POST" action="{% url 'login'%}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            placeholder="djwatches"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Enter password"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mt-5">Login</button>
+      </form>
+    </center>
     <div class="text-center text-white">
+      <br />
+      <br />
       <p class="lead fw-normal text-white-50 mb-0">
         Don't have an account? click to
         <a href="{% url 'register' %}">register</a>
