@@ -7,11 +7,13 @@
       <h1 class="display-4 fw-bolder">Register</h1>
       <p class="lead fw-normal text-white-50 mb-0">Register a new account</p>
     </div>
-    <form class="mt-5" method="POST" action="{% url 'register'%}">
-      {% csrf_token %} {{ form.as_p }}
-      <br />
-      <button type="submit" class="btn btn-primary">Register</button>
-    </form>
+    <center>
+      <form class="mt-5 col-md-4" method="POST" action="{% url 'register'%}">
+        {% csrf_token %} {{ form.as_p }}
+        <br />
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    </center>
   </div>
   <div class="text-center text-white">
     <p class="lead fw-normal text-white-50 mb-0">
