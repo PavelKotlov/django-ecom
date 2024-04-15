@@ -33,7 +33,6 @@ class Category(models.Model):
   class Meta:
     verbose_name_plural = 'categories'
 
-
 class Customer(models.Model):
   first_name = models.CharField(max_length=50)
   last_name = models.CharField(max_length=50)
