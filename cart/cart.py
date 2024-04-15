@@ -1,8 +1,9 @@
-from store.models import Product
+from store.models import Product, Profile
 
 class Cart():
   def __init__(self, request):
     self.session = request.session
+    self.request = request
 
     # Retrieve current session key if exists
     cart = self.session.get('session_key')
@@ -23,6 +24,16 @@ class Cart():
 
     self.session.modified = True
 
+    # Cart persistance
+    if self.request.user.is_authenticated:
+      # If user is authenticated grab the user profile
+      current_user = Profile.objects.filter(user__id=self.request.user.id)
+      # Grab the cart items convert them to str and prep for JSON
+      cart = str(self.cart)
+      cart = cart.replace("\'", "\"")
+      # Update old cart field in user profile with a str of cart items in dict format
+      current_user.update(old_cart=cart)
+    
   def cart_total(self):
     product_ids = self.cart.keys()
     products = Product.objects.filter(id__in=product_ids)
@@ -39,7 +50,6 @@ class Cart():
             total = total + (product.price * value)
 
     return total
-
 
   def __len__(self):
     return len(self.cart)
@@ -75,3 +85,4 @@ class Cart():
       del self.cart[product_id]
     
     self.session.modified = True
+  
