@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Header-->
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Billing Info</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Enter your billing info...</p>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card m-5">
+        <div class="card-header">
+          Billing Info
+        </div>
+        <div class="card-body">
+          {{billing_form.as_p}}
+        </div>
+      </div>
+      <a href="{% url 'home' %}" class="btn btn-primary mx-5 mb-5">Place Order</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
