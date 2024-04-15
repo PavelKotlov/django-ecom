@@ -9,17 +9,26 @@
         Please make changes to your account below
       </p>
     </div>
-    <center>
-      <form
-        class="mt-5 col-md-4"
-        method="POST"
-        action="{% url 'update_info' %}"
-      >
-        {% csrf_token %} {{ form.as_p }}
-        <br />
+    <form
+      class="col-md-4 offset-md-4"
+      method="POST"
+      action="{% url 'update_info' %}"
+    >
+      {% csrf_token %}
+
+      <div class="mt-5 mb-2">
+        <strong class="text-center text-white">Billing Information</strong>
+      </div>
+      {{ form.as_p }}
+      <div class="mt-5 mb-2">
+        <strong class="text-center text-white">Shipping Information</strong>
+      </div>
+      {{ shipping_form.as_p }}
+      <br />
+      <center>
         <button type="submit" class="btn btn-primary">Save</button>
-      </form>
-    </center>
+      </center>
+    </form>
   </div>
   <div class="text-center text-white">
     <p class="lead fw-normal text-white-50 mb-0">
