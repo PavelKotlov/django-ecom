@@ -42,15 +42,20 @@
           >
         </div>
       </div>
-      <div class="card m-5">
-        <div class="card-header">
-          Shipping Info
+      <form method="POST" action="{% url 'billing_info'%}">
+        {% csrf_token %}
+        <div class="card m-5">
+          <div class="card-header">
+            Shipping Info
+          </div>
+          <div class="card-body">
+            {{ shipping_form.as_p}}
+          </div>
         </div>
-        <div class="card-body">
-          {{ shipping_form.as_p}}
+        <div>
+          <button type="submit" href="{% url 'home' %}" class="btn btn-primary mx-5 mb-5">Continue to billing</button>
         </div>
-      </div>
-      <a href="{% url 'home' %}" class="btn btn-primary mx-5 mb-5">Continue to billing</a>
+      </form>
     </div>
   </div>
 </div>
