@@ -68,13 +68,18 @@
     </div>
   </div>
   {% endfor %} 
-    <h4 class="m-5">Cart Total: ${{totals}}</h4>
+    <div>
+      <h4 class="mx-5 mt-5 mb-2">Cart Total: ${{totals}}</h4>
+      <a href="{% url 'checkout'%}" class="mx-5 mt-3 mb-5 btn btn-primary">Checkout</a>
+    </div>
+
   {% else %}
   <center>
     <div class="m-5 p-5">
       Your cart is empty. Checkout our products
       <a href="{% url 'home' %}">here</a>
     </div>
+
   </center>
   {% endif %}
 </div>
