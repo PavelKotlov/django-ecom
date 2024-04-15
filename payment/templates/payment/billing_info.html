@@ -11,15 +11,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <div class="card m-5">
-        <div class="card-header">
-          Billing Info
+      <form method="POST" action="{% url 'process_order' %}">
+        <div class="card m-5">
+          <div class="card-header">
+            Billing Info
+          </div>
+          <div class="card-body">
+              {% csrf_token %}
+              {{ billing_form.as_p }}
+          </div>
         </div>
-        <div class="card-body">
-          {{billing_form.as_p}}
-        </div>
-      </div>
-      <a href="{% url 'home' %}" class="btn btn-primary mx-5 mb-5">Place Order</a>
+        <button type="submit" class="btn btn-primary mx-5 mb-5">Place Order</a>
+      </form>
     </div>
   </div>
 </div>
