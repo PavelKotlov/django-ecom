@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
+import json
+from cart.cart import Cart
 
 def update_info(request):
   if request.user.is_authenticated:
@@ -103,6 +105,20 @@ def login_user(request):
 
     if user is not None:
       login(request, user)
+
+      current_user = Profile.objects.get(user__id=request.user.id)
+      existing_cart = current_user.old_cart
+
+      if existing_cart:
+        # Convert cart string to dict
+        converted_cart = json.loads(existing_cart)
+        # Add existing cart to current new session
+        cart = Cart(request)
+        for key, value in converted_cart.items():
+          cart.db_add(product=key, cart_quantity=value)
+
+
+
       messages.success(request, ('You have been logged in succesfully'))
       return redirect('home')
     else:
