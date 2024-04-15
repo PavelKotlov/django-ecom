@@ -137,3 +137,20 @@ def register_user(request):
   else:
     return render(request, 'register.html', {'form': form})
   
+def search(request):
+  if request.method == 'POST':
+    searched = request.POST['searched']
+
+    if searched:
+      products = Product.objects.filter(name__icontains=searched)
+      if products:
+        return render(request, 'search.html', {'products':products})
+      
+      messages.success(request, ('No products matched your search, please try a different term'))
+      return render(request, 'search.html', {})
+
+    messages.success(request, ('Please enter a search term'))
+    return render(request, 'search.html', {})
+
+  else:
+    return render(request, 'search.html', {})
